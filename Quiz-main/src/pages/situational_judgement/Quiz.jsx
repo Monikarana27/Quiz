@@ -12,7 +12,7 @@ const Quiz = () => {
   const [isFinish, setIsFinish] = useState(false);
   const [result, setResult] = useState(initial_result);
   const [score, setScore] = useState(0);
-  const [timer, setTimer] = useState(600); 
+  const [timer, setTimer] = useState(600);
 
   useEffect(() => {
     const timerInterval = setInterval(() => {
@@ -79,32 +79,31 @@ const Quiz = () => {
   };
 
   return (
-    <div>
+    <div className='bg-purple-300 min-h-screen flex flex-col items-center overflow-hidden'>
       {isFinish ? (
         <Result results={result} finalScore={score} />
       ) : (
         <div>
-          <h1 className="text-center font-medium text-xl py-2">{quizData.quizName}</h1>
-          <p className="text-center text-slate-800 py-2">Category: {quizData.category}</p>
+          <h1 className="text-center font-pacifico font-bold text-3xl py-2 bg-purple-400 border rounded-md mr-2 ml-2 mt-2">{quizData.quizName}</h1>
+          <p className="text-center font-medium text-slate-800 py-2">Category: {quizData.category}</p>
           <div className='w-full flex justify-center'>
-
-          <div className="text-white px-1 rounded-sm text-center mb-4 bg-blue-500 w-fit">
-            Time Remaining: {Math.floor(timer / 60)}:{timer % 60 < 10 ? `0${timer % 60}` : timer % 60}
-          </div>
+            <div className="text-black font-medium px-1 rounded-sm text-center mb-4 bg-red-500 w-fit mr-auto ml-8">
+              Time Remaining: {Math.floor(timer / 60)}:{timer % 60 < 10 ? `0${timer % 60}` : timer % 60}
+            </div>
           </div>
           <section className="flex">
-            <div className="w-[75%]">
+            <div className="w-[75%] flex flex-col items-center ml-8">
               {quizData.questions.map((question, index) => (
-                <div key={index} style={{ display: index === activeQuestion ? 'block' : 'none' }}>
+                <div key={index} style={{ display: index === activeQuestion ? 'block' : 'none' }} className="border border-black p-4 rounded-md mb-4 bg-gray-200 -mb-6">
                   {question.type === 'MCQ' && (
                     <>
                       <span>
                         <h3 className="font-bold px-8 py-4">Q{index + 1}: {question.question}</h3>
                       </span>
-                      <pre className="text-sm leading-6 mx-4">{question.attachement}</pre>
+                      <pre className="text-sm font-bold leading-6 mx-4 ">{question.attachment}</pre>
                       <div className="pl-8">
                         {question.options.map((option, optionIndex) => (
-                          <div key={optionIndex}>
+                          <div key={optionIndex} className="my-2 p-2 border rounded-md font-bold" style={{ border: '1px solid #000', backgroundColor: '#fff' }}>
                             <label>
                               <input
                                 type="radio"
@@ -135,7 +134,7 @@ const Quiz = () => {
                     Save 
                   </button>
                 ) : (
-                  <button className="bg-blue-500 p-2 rounded-md mx-4" onClick={() => handleSaveAns(activeQuestion)}>
+                  <button className="bg-green-600 p-2 rounded-md mx-4" onClick={() => handleSaveAns(activeQuestion)}>
                     Save & Next
                   </button>
                 )}
@@ -143,12 +142,13 @@ const Quiz = () => {
             </div>
 
             {/* Questions navigation */}
-            <div className="w-[25%] h-[500px]  flex flex-col items-center justify-between">
-              <div className="flex gap-4 flex-wrap">
+            <div className="w-[25%] h-[450px] flex flex-col items-center justify-between ml-4 mr-2 border border-black p-4 rounded-md mb-4 bg-gray-200">
+              <div className="flex gap-4 flex-wrap grid grid-cols-5 gap-4 justify-center mr-4">
                 {Array.from({ length: quizData.totalQuestions }, (_, index) => (
                   <div
                     key={index}
                     className={`box w-10 h-10 flex items-center justify-center text-white rounded-md text-xl cursor-pointer ${index === activeQuestion ? 'bg-blue-500' : 'bg-green-400'}`}
+                    style={{ border: '1px solid #000', margin: '2px', padding: '5px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                     onClick={() => handleQuesNavigation(index)}
                   >
                     {index + 1}
@@ -160,7 +160,6 @@ const Quiz = () => {
               </button>
             </div>
           </section>
-         
         </div>
       )}
     </div>

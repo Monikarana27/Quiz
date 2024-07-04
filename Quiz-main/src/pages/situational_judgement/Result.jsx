@@ -26,11 +26,11 @@ const Result = ({ results, finalScore }) => {
 
  
   return (
-    <div className='mx-4 my-4'>
+    <div className='mx-4 my-4  border p-4 rounded-md bg-gray-200'>
       <Link to="/" className='bg-blue-500 text-white px-2 rounded-md ml-2 py-1'>Home</Link>
-      <h1 className='text-center text-semibold'>Quiz Results</h1>
-      <p className='text-center'>Final Score: {finalScore} ({percentage.toFixed(2)}%)</p>
-      <p className=''><strong>Interpretation:</strong></p>
+      <h1 className='text-center text-semibold font-bold text-3xl'>Quiz Results</h1>
+      <p className='text-center text-xl bg-green-400 rounded-md'>Final Score: {finalScore} ({percentage.toFixed(2)}%)</p>
+      <p className='text-bold'><strong>Interpretation:</strong></p>
 
       <pre class="whitespace-pre-wrap break-words">
           {interpretation}
@@ -41,7 +41,7 @@ const Result = ({ results, finalScore }) => {
       {showCorrectAnswers &&
       <div>
         {results.map((result, index) => (
-          <div key={index} className="my-4 border p-4 rounded-md">
+          <div key={index} className="my-4 border p-4 rounded-md bg-purple-300">
             <p><strong>Question: </strong>{result.ques}</p>
              <p><strong>Correct Answer: </strong>{result.correct_ans}</p>
             <p><strong>User's Answer: </strong>{result.user_ans}</p>
